@@ -2,8 +2,12 @@ import { StyleSheet } from "react-native";
 
 
 const styles = StyleSheet.create({
-    container: {
+    wrapper: {
         flex: 1,
+        backgroundColor: '#f5f5f5'
+    },
+    container: {
+        flexGrow: 1,
         alignItems: 'center',
         backgroundColor: '#f5f5f5',
         padding: 20
@@ -61,6 +65,18 @@ const styles = StyleSheet.create({
     cardText: {
         fontSize: 16,
         color: '#666'
+    },
+    usageText: {
+        fontSize: 12,
+        color: '#999',
+        marginTop: 10
+    },
+    image: {
+        width: '100%',
+        aspectRatio: 1,
+        maxHeight: 320,
+        borderRadius: 10,
+        backgroundColor: '#eee'
     }
 })
 

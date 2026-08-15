@@ -1,50 +1,47 @@
-# Welcome to your Expo app 👋
+# Desculpator 3000
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Desculpator 3000 é um exemplo de como chamar a IA do Google (Gemini) para pedir uma desculpa: a partir de um evento digitado pelo usuário, o app gera um texto de desculpa e uma imagem ilustrando a cena, além de mostrar quantos tokens foram consumidos e o custo estimado em USD.
 
-## Get started
+## Como funciona
 
-1. Install dependencies
+- `service/ai/generator.ts` chama `generateText` (modelo `gemini-3.6-flash`) para gerar o texto da desculpa, e `generateImage` (modelo `gemini-2.5-flash-image`) para gerar uma ilustração a partir desse texto.
+- Cada chamada retorna também o uso de tokens (`inputTokens`, `outputTokens`, `totalTokens`), usado para calcular o custo estimado com os preços oficiais do Gemini.
+- `app/index.tsx` exibe o texto, os tokens/custo e a imagem gerados dentro de containers roláveis.
+
+## Configuração
+
+1. Instale as dependências:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Crie um arquivo `.env` na raiz do projeto com sua chave da Gemini API ([obtenha uma aqui](https://aistudio.google.com/apikey)):
+
+   ```
+   EXPO_PUBLIC_GEMINI_API_KEY=sua_chave_aqui
+   ```
+
+   Geração de imagem requer billing habilitado no projeto do Google AI Studio (o tier gratuito não libera cota para modelos de imagem).
+
+3. Inicie o app:
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Exemplo de uso
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+O marido pediu para o Desculpator dar uma desculpa para ele andar de moto. O Desculpator mostrou o texto:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+> **Sua desculpa está pronta**
+>
+> "Amor, não é um passeio de lazer, é uma missão científica de extrema urgência: fui ali rodar uns quilômetros com o pessoal do couro só pra testar se o asfalto tá macio o suficiente pra quando eu for te levar pra passear!"
 
-## Get a fresh project
+E gerou a imagem:
 
-When you're ready, run:
+![Exemplo de desculpa gerada](docs/imagem.png)
 
-```bash
-npm run reset-project
-```
+Junto com o resumo de custo:
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+> Tokens usados: 1129 (entrada: 39, saída: 1090) · Custo estimado: $0.004117
