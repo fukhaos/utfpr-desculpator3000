@@ -2,6 +2,8 @@ import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import styles from "@/styles";
 import { useState } from "react";
 import { geradorDesculpa } from "@/service/ai/generator";
+import { MotiView } from "moti";
+
 
 
 export default function Index() {
@@ -40,10 +42,17 @@ setIsLoading(true)
         }</Text>
       </TouchableOpacity>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>Sua desculpa está pronta </Text>
-        <Text style={styles.cardText}>{resposta}</Text>
-      </View>
+      {resposta && (
+        <MotiView
+          style={styles.card}
+          from={{ opacity: 0, translateY: 100 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          transition={{ type: "spring", stiffness: 100 }}
+        >
+          <Text style={styles.cardTitle}>Sua desculpa está pronta </Text>
+          <Text style={styles.cardText}>{resposta}</Text>
+        </MotiView>
+      )}
     </View>
   );
 }
