@@ -7,10 +7,17 @@ import { geradorDesculpa } from "@/service/ai/generator";
 export default function Index() {
   const [evento, setEvento] = useState("");
   const [resposta, setResposta] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const callDesculpa = async () => {
+    setResposta("");
+setIsLoading(true)
     const desculpa = await geradorDesculpa(evento);
     setResposta(desculpa);
+
+    setIsLoading(false)
+    setEvento("");
+
   };
 
   return (
@@ -28,7 +35,9 @@ export default function Index() {
       />
 
       <TouchableOpacity style={styles.button} onPress={callDesculpa}>
-        <Text style={styles.buttonText}>Gerar Desculpa infalível</Text>
+        <Text style={styles.buttonText}>{
+          isLoading ? "Carregando..." : "Gerar Desculpa infalível"
+        }</Text>
       </TouchableOpacity>
 
       <View style={styles.card}>
