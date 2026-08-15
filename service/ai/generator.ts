@@ -8,7 +8,7 @@ const google = createGoogleGenerativeAI({
 export const geradorDesculpa = async (evento: string) => {
   try {
     const { text } = await generateText({
-      model: google("gemini-2.5-flash"),
+      model: google("gemini-3.6-flash"),
 
       system:
         "Gere apenas uma desculpa engraçada, criativa e que não ofenda ninguém.",
